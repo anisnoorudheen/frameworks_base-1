@@ -3730,6 +3730,13 @@ public final class Settings {
         public static final String POWERMENU_POWER = "powermenu_power";
 
         /**
+         * Toast animations
+         *
+         * @hide
+         */
+        public static final String TOAST_ANIMATION = "toast_animation";
+
+        /**
          * ListView Animations
          * 0 == None
          * 1 == Wave (Left)
