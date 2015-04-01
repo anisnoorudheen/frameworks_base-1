@@ -39,5 +39,9 @@
 
   <!-- Screen Recording -->
   <java-symbol type="bool" name="config_enableScreenrecordChord" />
+
+  <!-- Automatic brightness enhancements -->
+  <java-symbol type="integer" name="config_autoBrightnessBrighteningLightFastDebounce"/>
+
 </resources>
 
