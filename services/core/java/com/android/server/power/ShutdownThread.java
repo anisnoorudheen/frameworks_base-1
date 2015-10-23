@@ -48,6 +48,7 @@ import android.os.Vibrator;
 import android.os.SystemVibrator;
 import android.os.storage.IMountService;
 import android.os.storage.IMountShutdownObserver;
+import android.provider.Settings;
 import android.system.ErrnoException;
 import android.system.Os;
 
@@ -178,6 +179,12 @@ public final class ShutdownThread extends Thread {
                          ? com.android.internal.R.string.reboot_system
                          : com.android.internal.R.string.power_off);
 
+        final int titleResourceId = mRebootSafeMode
+                 ? com.android.internal.R.string.reboot_safemode_title
+                 : (mReboot
+                         ? com.android.internal.R.string.reboot_system
+                         : com.android.internal.R.string.power_off);
+
         Log.d(TAG, "Notifying thread to start shutdown longPressBehavior=" + longPressBehavior);
 
         if (confirm) {
@@ -212,7 +219,7 @@ public final class ShutdownThread extends Thread {
                                             com.android.internal.R.array.shutdown_reboot_actions);
 
                                     if (actions != null && which < actions.length)
-                                        mReason = actions[which];
+                                        mRebootReason = actions[which];
 
                                     mReboot = true;
                                     beginShutdownSequence(context);
@@ -245,10 +252,12 @@ public final class ShutdownThread extends Thread {
                         .setNegativeButton(com.android.internal.R.string.no, null)
                         .create();
             }
+
             closer.dialog = sConfirmDialog;
             sConfirmDialog.setOnDismissListener(closer);
             sConfirmDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
             sConfirmDialog.show();
+
         } else {
             beginShutdownSequence(context);
         }
@@ -371,9 +380,12 @@ public final class ShutdownThread extends Thread {
             }
         } else if (PowerManager.REBOOT_RECOVERY.equals(mReason)) {
             // Factory reset path. Set the dialog message accordingly.
-            pd.setTitle(context.getText(com.android.internal.R.string.reboot_title));
+            pd.setTitle(context.getText(com.android.internal.R.string.global_action_reboot));
             pd.setMessage(context.getText(
                         com.android.internal.R.string.reboot_progress));
+        } else if (mReboot) {
+            pd.setTitle(context.getText(com.android.internal.R.string.global_action_reboot));
+            pd.setMessage(context.getText(com.android.internal.R.string.reboot_progress));
             pd.setIndeterminate(true);
         } else if (mReboot) {
             pd.setTitle(context.getText(com.android.internal.R.string.reboot_title));
