@@ -467,5 +467,12 @@
             android:enabled="true"
             android:exported="true" />
 
+       <activity android:name=".DaylightHeaderDefault"
+                android:label="Default" >
+            <intent-filter>
+                <action android:name="org.omnirom.DaylightHeaderPack" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest>
