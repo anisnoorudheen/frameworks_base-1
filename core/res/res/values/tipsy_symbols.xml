@@ -26,6 +26,8 @@
   <java-symbol type="array" name="shutdown_reboot_options" />
   <java-symbol type="string" name="reboot_system" />
   <java-symbol type="string" name="reboot_progress" />
+  <java-symbol type="drawable" name="ic_lock_power_screenrecord" />
+  <java-symbol type="string" name="powermenu_screenrecord" />
 
   <!-- LED pulse -->
   <java-symbol type="bool" name="config_ledCanPulse" />
