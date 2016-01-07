@@ -131,6 +131,7 @@ public class NavigationBarView extends LinearLayout {
     private Drawable mBackIcon, mBackLandIcon, mBackAltIcon, mBackAltLandIcon;
     private Drawable mRecentIcon;
     private Drawable mRecentLandIcon;
+    private Drawable mHomeIcon, mHomeLandIcon;
 
     private int mRippleColor;
 
@@ -384,6 +385,12 @@ public class NavigationBarView extends LinearLayout {
         mBackAltLandIcon = mBackAltIcon;
         mRecentIcon = res.getDrawable(R.drawable.ic_sysbar_recent);
         mRecentLandIcon = mRecentIcon;
+        mHomeIcon = res.getDrawable(R.drawable.ic_sysbar_home);
+        mHomeLandIcon = mHomeIcon;
+    }
+
+    public void updateResources() {
+        getIcons(getContext().getResources());
     }
 
     @Override
