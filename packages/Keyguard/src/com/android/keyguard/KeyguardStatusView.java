@@ -223,6 +223,7 @@ private WeatherController mWeatherController;
         refreshLockFont();
         refreshClockColors();
         updateWeatherSettings(false);
+        updateSettings(false);
     }
 
     void refreshAlarmStatus(AlarmManager.AlarmClockInfo nextAlarm) {
@@ -265,6 +266,7 @@ private WeatherController mWeatherController;
         KeyguardUpdateMonitor.getInstance(mContext).registerCallback(mInfoCallback);
         updateWeatherSettings(false);
         mWeatherController.addCallback(this);
+        updateSettings(false);
     }
 
     @Override
@@ -295,6 +297,29 @@ private WeatherController mWeatherController;
     public boolean hasOverlappingRendering() {
         return false;
     }
+
+    private void updateSettings(boolean forceHide) {
+        final ContentResolver resolver = getContext().getContentResolver();
+        final Resources res = getContext().getResources();
+        AlarmManager.AlarmClockInfo nextAlarm =
+                mAlarmManager.getNextAlarmClock(UserHandle.USER_CURRENT);
+        boolean showAlarm = Settings.System.getIntForUser(resolver,
+                Settings.System.HIDE_LOCKSCREEN_ALARM, 1, UserHandle.USER_CURRENT) == 1;
+        boolean showClock = Settings.System.getIntForUser(resolver,
+                Settings.System.HIDE_LOCKSCREEN_CLOCK, 1, UserHandle.USER_CURRENT) == 1;
+        boolean showDate = Settings.System.getIntForUser(resolver,
+                Settings.System.HIDE_LOCKSCREEN_DATE, 1, UserHandle.USER_CURRENT) == 1;
+
+        mClockView = (TextClock) findViewById(R.id.clock_view);
+        mClockView.setVisibility(showClock ? View.VISIBLE : View.GONE);
+
+        mDateView.setVisibility(showDate ? View.VISIBLE : View.GONE);
+        mDateView = (TextClock) findViewById(R.id.date_view);
+
+        mAlarmStatusView = (TextView) findViewById(R.id.alarm_status);
+        mAlarmStatusView.setVisibility(showAlarm && nextAlarm != null ? View.VISIBLE : View.GONE);
+    }
+
 
     @Override
     public void onWeatherChanged(WeatherController.WeatherInfo info) {
@@ -499,7 +524,10 @@ private WeatherController mWeatherController;
         static void update(Context context, boolean hasAlarm) {
             final Locale locale = Locale.getDefault();
             final Resources res = context.getResources();
-            final String dateViewSkel = res.getString(hasAlarm
+            final ContentResolver resolver = context.getContentResolver();
+            final boolean showAlarm = Settings.System.getIntForUser(resolver,
+                    Settings.System.HIDE_LOCKSCREEN_ALARM, 1, UserHandle.USER_CURRENT) == 1;
+            final String dateViewSkel = res.getString(hasAlarm && showAlarm
                     ? R.string.abbrev_wday_month_day_no_year_alarm
                     : R.string.abbrev_wday_month_day_no_year);
             final String clockView12Skel = res.getString(R.string.clock_12hr_format);
