@@ -2426,5 +2426,5 @@
   <java-symbol type="bool" name="config_passpoint_setting_on" />
 
   <!--Set timestamp for older devices-->
-  <java-symbol type="bool" name="config_useSystemClockforSensors" />
+  <java-symbol type="bool" name="config_useSystemClockforRotationSensor" />
 </resources>
