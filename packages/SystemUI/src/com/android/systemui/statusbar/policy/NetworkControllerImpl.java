@@ -246,10 +246,6 @@ public class NetworkControllerImpl extends BroadcastReceiver
         mCallbackHandler.setEmergencyCallsOnly(isEmergencyOnly());
     }
 
-    public void removeEmergencyListener(EmergencyListener listener) {
-        mCallbackHandler.setListening(listener, false);
-    }
-
     public boolean hasMobileDataFeature() {
         return mHasMobileDataFeature;
     }
