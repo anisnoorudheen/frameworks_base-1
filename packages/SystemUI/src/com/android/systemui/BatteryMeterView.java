@@ -876,26 +876,27 @@ public class BatteryMeterView extends View implements DemoMode,
         private void updateChargeAnim(BatteryTracker tracker) {
             // Stop animation when battery is full or after the meter
             // rotated back to 0 after unplugging.
-            if (!tracker.shouldIndicateCharging() && mAnimOffset == 0
-                    || tracker.status == BatteryManager.BATTERY_STATUS_FULL) {
-                if (mIsAnimating) {
-                    mIsAnimating = false;
-                    mAnimOffset = 0;
-                    mHandler.removeCallbacks(mInvalidate);
-                }
-                return;
+            if (!tracker.shouldIndicateCharging()
+                    || tracker.status == BatteryManager.BATTERY_STATUS_FULL
+                    || tracker.level == 0) {
+                mIsAnimating = false;
+            } else {
+                mIsAnimating = true;
             }
-
-            mIsAnimating = true;
 
             if (mAnimOffset > 360) {
                 mAnimOffset = 0;
-            } else {
+            }
+
+            boolean continueAnimation = mIsAnimating || mAnimOffset != 0;
+
+            if (continueAnimation) {
                 mAnimOffset += 3;
             }
 
-            mHandler.removeCallbacks(mInvalidate);
-            mHandler.postDelayed(mInvalidate, 50);
+            if (continueAnimation) {
+                postInvalidateDelayed(50);
+            }
         }
 
         /**
