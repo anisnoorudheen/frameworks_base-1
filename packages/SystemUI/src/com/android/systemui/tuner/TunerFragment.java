@@ -63,4 +63,6 @@ public class TunerFragment extends PreferenceFragment {
         MetricsLogger.visibility(getContext(), MetricsEvent.TUNER, false);
     }
 
+                        if (getActivity() != null) {
+                        }
 }
