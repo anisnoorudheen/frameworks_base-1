@@ -3744,10 +3744,9 @@ public final class Settings {
         public static final String STATUSBAR_BATTERY_BAR_CHARGING_COLOR = "statusbar_battery_bar_charging_color";
 
         /**
-         * Whether to show Brightness Icon On Brightness Slider
          * @hide
          */
-        public static final String QS_SHOW_BRIGHTNESS_ICON = "qs_show_brightness_icon";
+        public static final String STATUSBAR_BATTERY_BAR_BATTERY_LOW_COLOR = "statusbar_battery_bar_battery_low_color";
 
         /**
          * @hide
@@ -3763,6 +3762,12 @@ public final class Settings {
          * @hide
          */
         public static final String STATUSBAR_BATTERY_BAR_ANIMATE = "statusbar_battery_bar_animate";
+
+        /**
+         * Whether to show Brightness Icon On Brightness Slider
+         * @hide
+         */
+        public static final String QS_SHOW_BRIGHTNESS_ICON = "qs_show_brightness_icon";
 
         /** @hide */
         public static final Validator EGG_MODE_VALIDATOR = new Validator() {

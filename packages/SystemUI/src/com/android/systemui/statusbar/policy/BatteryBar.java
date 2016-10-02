@@ -45,15 +45,20 @@ public class BatteryBar extends RelativeLayout implements Animatable {
     // Total animation duration
     private static final int ANIM_DURATION = 1000; // 5 seconds
 
+    // When to use the low battery color
+    private static final int BATTERY_LOW_VALUE = 15;
+
     private boolean mAttached = false;
     private int mBatteryLevel = 0;
     private int mChargingLevel = -1;
     private boolean mBatteryCharging = false;
-    private boolean shouldAnimateCharging = false;
+    private boolean shouldAnimateCharging = true;
     private boolean isAnimating = false;
 
     private int color = 0xFFFFFFFF;
     private int charging_color = 0xFFFFFFFF;
+    private int batteryLowColor = 0xFFFFFFFF;
+
     private Handler mHandler = new Handler();
 
     LinearLayout mBatteryBarLayout;
@@ -83,11 +88,12 @@ public class BatteryBar extends RelativeLayout implements Animatable {
             resolver.registerContentObserver(
                     Settings.System.getUriFor(Settings.System.STATUSBAR_BATTERY_BAR_CHARGING_COLOR), false,
                     this);
-            /* not suppported
+            resolver.registerContentObserver(
+                    Settings.System.getUriFor(
+                            Settings.System.STATUSBAR_BATTERY_BAR_BATTERY_LOW_COLOR), false, this);
             resolver.registerContentObserver(
                     Settings.System.getUriFor(Settings.System.STATUSBAR_BATTERY_BAR_ANIMATE),
                     false, this);
-             */
         }
 
         @Override
@@ -208,11 +214,11 @@ public class BatteryBar extends RelativeLayout implements Animatable {
                 0xFFFFFFFF);
         charging_color = Settings.System.getInt(resolver, Settings.System.STATUSBAR_BATTERY_BAR_CHARGING_COLOR,
                 0xFFFFFFFF);
+        batteryLowColor = Settings.System.getInt(resolver, Settings.System.STATUSBAR_BATTERY_BAR_BATTERY_LOW_COLOR,
+                0xFFFFFFFF);
 
-        /* not supported
         shouldAnimateCharging = Settings.System.getInt(resolver,
                 Settings.System.STATUSBAR_BATTERY_BAR_ANIMATE, 0) == 1;
-         */
 
         if (mBatteryCharging && mBatteryLevel < 100 && shouldAnimateCharging) {
             start();
@@ -240,17 +246,14 @@ public class BatteryBar extends RelativeLayout implements Animatable {
             mBatteryBarLayout.setLayoutParams(params);
         }
 
-        if (mBatteryCharging) {
-            mBatteryBar.setBackgroundColor(charging_color);
-        } else {
-            mBatteryBar.setBackgroundColor(color);
-        }
+        // Update color
+        mBatteryBar.setBackgroundColor(mBatteryCharging ? charging_color :
+                (n > BATTERY_LOW_VALUE ? color : batteryLowColor));
 
     }
 
     @Override
     public void start() {
-        /* not supported - not-reached below
         if (!shouldAnimateCharging)
             return;
 
@@ -272,17 +275,13 @@ public class BatteryBar extends RelativeLayout implements Animatable {
             mChargerLayout.setVisibility(View.VISIBLE);
         }
         isAnimating = true;
-        */
     }
 
     @Override
     public void stop() {
-        return;
-        /* not supported - not-reached below
         mChargerLayout.clearAnimation();
         mChargerLayout.setVisibility(View.GONE);
         isAnimating = false;
-        */
     }
 
     @Override
