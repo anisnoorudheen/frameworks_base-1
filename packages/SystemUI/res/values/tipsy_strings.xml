@@ -89,4 +89,11 @@
     <string name="accessibility_quick_settings_nfc_changed_off">NFC turned off.</string>
     <string name="accessibility_quick_settings_nfc_changed_on">NFC turned on.</string>
 
+    <!-- Screen off QS Tile  -->
+    <string name="quick_settings_screen_off_label">Screen off</string>
+    <string name="accessibility_quick_settings_screen_off">Screen off.</string>
+    <!-- Screenshot QS Tile -->
+    <string name="accessibility_quick_settings_screenshot">Screenshot.</string>
+    <string name="quick_settings_screenshot_label">Screenshot</string>
+
 </resources>
