@@ -28,4 +28,7 @@
         avoid 3s delay for certain fpc HALs -->
     <bool name="config_fingerprintRemoveClientOnCancel">false</bool>
 
+    <!-- Whether notify fingerprint client of successful cancelled authentication -->
+    <bool name="config_notifyClientOnFingerprintCancelSuccess">true</bool>
+
 </resources>

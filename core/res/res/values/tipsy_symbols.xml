@@ -46,5 +46,8 @@
   <!-- fingerprintRemoveClientOnCancel -->
   <java-symbol type="bool" name="config_fingerprintRemoveClientOnCancel" />
 
+  <!-- Whether notify fingerprint client of successful cancelled authentication -->
+  <java-symbol type="bool" name="config_notifyClientOnFingerprintCancelSuccess" />
+
 </resources>
 
