@@ -6887,7 +6887,7 @@ public final class Settings {
         public static final String STATUS_BAR_BATTERY_STYLE_TILE = "status_bar_battery_style_tile";
 
         /**
-         * battery icon color when charging
+         * battery icon color while charging
          *
          * @hide
          */
@@ -6899,6 +6899,16 @@ public final class Settings {
          * @hide
          */
         public static final String FORCE_CHARGE_BATTERY_TEXT = "force_charge_battery_text";
+
+        /**
+         * Charging symbol near battery text percentage
+         * 0: no symbol
+         * 1: flash symbol
+         * 2: tilde symbol
+         * default: 0
+         * @hide
+         */
+        public static final String TEXT_CHARGING_SYMBOL = "text_charging_symbol";
 
         /**
          * This are the settings to be backed up.
