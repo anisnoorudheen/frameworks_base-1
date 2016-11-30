@@ -674,7 +674,11 @@ public class BatteryMeterDrawable extends Drawable implements
         // Not much we can do with zero width or height, we'll get another pass later
         if (mWidth <= 0 || mHeight <= 0) return;
 
+        // text size is width / 2 - 2dp for wiggle room
         final float widthDiv2 = mWidth / 2f;
+        // text size is adjusted for just the circle battery
+        final float widthDivCircle = mWidth / 3f;
+
         final float textSize;
         switch(mStyle) {
             case BATTERY_STYLE_CIRCLE:
