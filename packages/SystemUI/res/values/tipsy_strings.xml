@@ -107,4 +107,8 @@
     <string name="omnijaws_current_text">Now</string>
     <string name="omnijaws_package_not_available">OmniJaws not available</string>
 
+    <!-- Tipsy Logo -->
+    <string name="status_bar_tipsy_logo_title">Tipsy logo</string>
+    <string name="status_bar_tipsy_logo_summary">Enable to show Tipsy logo on the left side of the statusbar</string>
+
 </resources>
