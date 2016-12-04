@@ -185,12 +185,6 @@ public final class ShutdownThread extends Thread {
                          ? com.android.internal.R.string.reboot_system
                          : com.android.internal.R.string.power_off);
 
-        final int titleResourceId = mRebootSafeMode
-                 ? com.android.internal.R.string.reboot_safemode_title
-                 : (mReboot
-                         ? com.android.internal.R.string.reboot_system
-                         : com.android.internal.R.string.power_off);
-
         Log.d(TAG, "Notifying thread to start shutdown longPressBehavior=" + longPressBehavior);
 
         if (confirm) {
