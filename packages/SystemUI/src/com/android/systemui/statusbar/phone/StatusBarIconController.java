@@ -94,6 +94,9 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
     private TextView mWeather;
     private TextView mWeatherLeft;
 
+    // Tipsy Logo
+    private ImageView mTipsyLogo;
+
     private int mIconSize;
     private int mIconHPadding;
 
@@ -154,10 +157,14 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
         scaleBatteryMeterViews(context);
 
         mNetworkTraffic = (NetworkTraffic) statusBar.findViewById(R.id.networkTraffic);
+
         mCarrierLabel = (TextView) statusBar.findViewById(R.id.statusbar_carrier_text);
         mNotificationTicker = (TickerView) statusBar.findViewById(R.id.tickerText);
         mWeather = (TextView) statusBar.findViewById(R.id.weather_temp);
 	mWeatherLeft = (TextView) statusBar.findViewById(R.id.left_weather_temp);
+
+        mTipsyLogo = (ImageView) statusBar.findViewById(R.id.tipsy_logo);
+
         mDarkModeIconColorSingleTone = context.getColor(R.color.dark_mode_icon_color_single_tone);
         mLightModeIconColorSingleTone = context.getColor(R.color.light_mode_icon_color_single_tone);
         mHandler = new Handler();
@@ -365,11 +372,19 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
     public void hideNotificationIconArea(boolean animate) {
         animateHide(mNotificationIconAreaInner, animate);
         animateHide(mCenterClockLayout, animate);
+        if (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_TIPSY_LOGO, 0) == 1) {
+           animateHide(mTipsyLogo, animate);
+        }
     }
 
     public void showNotificationIconArea(boolean animate) {
         animateShow(mNotificationIconAreaInner, animate);
         animateShow(mCenterClockLayout, animate);
+        if (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_TIPSY_LOGO, 0) == 1) {
+           animateShow(mTipsyLogo, animate);
+        }
     }
 
     public void setClockVisibility(boolean visible) {
@@ -587,6 +602,7 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
         mWeatherLeft.setTextColor(mIconTint);
         if (mNotificationTicker != null) mNotificationTicker.setDarkIntensity(mDarkIntensity);
         }
+        mTipsyLogo.setImageTintList(ColorStateList.valueOf(mIconTint));
     }
 
     public void appTransitionPending() {
