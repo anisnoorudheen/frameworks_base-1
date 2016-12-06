@@ -35,6 +35,9 @@
 #include <utils/threads.h>
 #include <utils/Timers.h>
 #include <utils/Trace.h>
+#ifndef _WIN32
+#include <sys/file.h>
+#endif
 
 #include <assert.h>
 #include <dirent.h>
@@ -759,6 +762,16 @@ Asset* AssetManager::openIdmapLocked(const struct asset_path& ap) const
     return ass;
 }
 
+#ifndef _WIN32
+    if (TEMP_FAILURE_RETRY(flock(fileno(fin), LOCK_SH)) != 0) {
+        fclose(fin);
+        return;
+    }
+#endif
+
+#ifndef _WIN32
+    TEMP_FAILURE_RETRY(flock(fileno(fin), LOCK_UN));
+#endif
 const ResTable& AssetManager::getResources(bool required) const
 {
     const ResTable* rt = getResTable(required);
@@ -1851,6 +1864,7 @@ ZipFileRO* AssetManager::SharedZip::getZip()
 
 Asset* AssetManager::SharedZip::getResourceTableAsset()
 {
+    AutoMutex _l(gLock);
     ALOGV("Getting from SharedZip %p resource asset %p\n", this, mResourceTableAsset);
     return mResourceTableAsset;
 }
@@ -1860,10 +1874,10 @@ Asset* AssetManager::SharedZip::setResourceTableAsset(Asset* asset)
     {
         AutoMutex _l(gLock);
         if (mResourceTableAsset == NULL) {
-            mResourceTableAsset = asset;
             // This is not thread safe the first time it is called, so
             // do it here with the global lock held.
             asset->getBuffer(true);
+            mResourceTableAsset = asset;
             return asset;
         }
     }
