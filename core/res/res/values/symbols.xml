@@ -2817,6 +2817,9 @@
   <java-symbol type="bool" name="config_volte_preferred" />
   <java-symbol type="bool" name="operator_custom_sim_icon" />
 
+  <java-symbol type="integer" name="config_sms_authorization_timeout_ms" />
+  <java-symbol type="bool" name="config_sms_authorization_enabled" />
+
   <!-- Notification and battery light -->
   <java-symbol type="bool" name="config_intrusiveNotificationLed" />
   <java-symbol type="bool" name="config_multiColorNotificationLed" />
