@@ -21064,6 +21064,13 @@ Slog.v(TAG, ":: stepped forward, applying functor at tag " + parser.getName());
         }
 
         @Override
+        public boolean wasPackageEverLaunched(String packageName, int userId) {
+            synchronized (mPackages) {
+                return mSettings.wasPackageEverLaunchedLPr(packageName, userId);
+            }
+        }
+
+        @Override
         public List<String> getTargetPackageNames(int userId) {
             List<String> targetPackages = new ArrayList<>();
             synchronized (mPackages) {
