@@ -4101,10 +4101,10 @@ public final class Settings {
         public static final String GESTURE_ANYWHERE_TRIGGER_HEIGHT = "gesture_anywhere_trigger_height";
 
           /**
-          * Whether to show the negociated charger current in the lockscreen
+          * Whether to show the battery info on the lockscreen while charging
           * @hide
           */
-         public static final String LOCKSCREEN_CHARGING_CURRENT = "lockscreen_charging_current";
+         public static final String LOCKSCREEN_BATTERY_INFO = "lockscreen_battery_info";
  
         /**
          * Whether to display the gesture anywhere trigger region or not.
