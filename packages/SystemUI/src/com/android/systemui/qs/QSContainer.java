@@ -67,6 +67,7 @@ public class QSContainer extends FrameLayout {
     private boolean mListening;
 
     private HorizontalScrollView mQuickQsPanelScroller;
+    private ViewGroup mQuickQsPanelScrollerContainer;
     public QSContainer(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -79,6 +80,7 @@ public class QSContainer extends FrameLayout {
         mHeader = (BaseStatusBarHeader) findViewById(R.id.header);
         mQSDetail.setQsPanel(mQSPanel, mHeader);
         mQuickQsPanelScroller = (HorizontalScrollView) mHeader.findViewById(R.id.quick_qs_panel_scroll);
+        mQuickQsPanelScrollerContainer = (ViewGroup) mHeader.findViewById(R.id.quick_qs_panel_scroll_container);
         mQSAnimator = new QSAnimator(this, (QuickQSPanel) mHeader.findViewById(R.id.quick_qs_panel),
                 mQSPanel, mQuickQsPanelScroller);
         mQSCustomizer = (QSCustomizer) findViewById(R.id.qs_customize);
@@ -193,6 +195,14 @@ public class QSContainer extends FrameLayout {
         mHeader.setExpanded((mKeyguardShowing && !mHeaderAnimating)
                 || (mQsExpanded && !mStackScrollerOverscrolling));
         mQSPanel.setVisibility(expandVisually ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    public void updateSettings() {
+        final boolean quickQsScrollEnabled = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.QS_QUICKBAR_SCROLL_ENABLED, QuickQSPanel.NUM_QUICK_TILES_DEFAULT,
+                UserHandle.USER_CURRENT) == QuickQSPanel.NUM_QUICK_TILES_ALL;
+        mQuickQsPanelScrollerContainer.setClipChildren(quickQsScrollEnabled);
+        mQuickQsPanelScrollerContainer.setClipToPadding(quickQsScrollEnabled);
     }
 
     public BaseStatusBarHeader getHeader() {
