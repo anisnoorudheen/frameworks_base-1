@@ -2110,7 +2110,7 @@
          -->
     <string-array translatable="false" name="config_globalActionsList">
         <item>power</item>
-        <item>restart</item>
+        <item>reboot</item>
         <item>screenshot</item>
         <item>airplane</item>
         <item>settings</item>
