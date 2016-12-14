@@ -387,7 +387,6 @@ status_t BootAnimation::readyToRun() {
     else if (access(SYSTEM_BOOTANIMATION_FILE, R_OK) == 0) {
         mZipFileName = SYSTEM_BOOTANIMATION_FILE;
     }
-    }
 
 #ifdef PRELOAD_BOOTANIMATION
     // Preload the bootanimation zip on memory, so we don't stutter
