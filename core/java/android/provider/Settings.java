@@ -6866,7 +6866,7 @@ public final class Settings {
          * 2: Display the battery percentage next to the icon
          * @hide
          */
-public static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
+        public static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
 
         /**
          * This are the settings to be backed up.
