@@ -55,4 +55,9 @@
         <item name="android:textColor">@color/status_bar_carrier_color</item>
     </style>
 
+    <!-- StatusBar Weather -->
+    <style name="TextAppearance.StatusBar.WeatherTemp" parent="@*android:style/TextAppearance.StatusBar">
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>
