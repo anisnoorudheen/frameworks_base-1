@@ -182,8 +182,8 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
 
         scaledLayoutParams.setMarginsRelative(marginStart, 0, 0, marginBottom);
 
-        //mBatteryMeterView.setLayoutParams(scaledLayoutParams);
-        //mBatteryMeterViewKeyguard.setLayoutParams(scaledLayoutParams);
+        mBatteryMeterView.setLayoutParams(scaledLayoutParams);
+        mBatteryMeterViewKeyguard.setLayoutParams(scaledLayoutParams);
     }
 
     @Override
