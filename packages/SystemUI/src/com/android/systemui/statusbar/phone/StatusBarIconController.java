@@ -546,12 +546,9 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
             v.setImageTintList(ColorStateList.valueOf(getTint(mTintArea, v, mIconTint)));
         }
         mSignalCluster.setIconTint(mIconTint, mDarkIntensity, mTintArea);
-<<<<<<< HEAD
         mBatteryMeterView.setDarkIntensity(
                 isInArea(mTintArea, mBatteryMeterView) ? mDarkIntensity : 0);
-=======
         mCarrierLabel.setTextColor(getTint(mTintArea, mCarrierLabel, mIconTint));
->>>>>>> 3c78da2... Custom Carrier Label & Carrier Label Placement [1/2] [Squashed]
         mClockController.setTextColor(mIconTint);
 	mNetworkTraffic.setDarkIntensity(mDarkIntensity);
         mBatteryLevelView.setTextColor(getTint(mTintArea, mBatteryLevelView, mIconTint));

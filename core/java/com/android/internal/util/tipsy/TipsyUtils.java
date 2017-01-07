@@ -20,7 +20,7 @@ import android.content.res.Resources;
 
 import java.util.Locale;
 
-public class TeslaUtils {
+public class TipsyUtils {
 
     public static boolean isChineseLanguage() {
        return Resources.getSystem().getConfiguration().locale.getLanguage().startsWith(
