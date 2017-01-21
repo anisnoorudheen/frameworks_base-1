@@ -3784,6 +3784,12 @@ public final class Settings {
          */
 
         /**
+         * Dashboard columns in settings
+         * @hide
+         */
+        public static final String DASHBOARD_COLUMNS = "dashboard_columns";
+
+        /**
          * Disable dashboard conditions in settings
          * @hide
          */
