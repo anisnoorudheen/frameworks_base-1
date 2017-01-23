@@ -22,4 +22,7 @@
     <!-- carrier label color -->
     <color name="status_bar_carrier_color">#FFFFFFFF</color>
 
+    <!-- Battery charging color -->
+    <color name="system_primary_color">#ff263238</color><!-- blue grey 900 -->
+
 </resources>

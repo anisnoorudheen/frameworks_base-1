@@ -3744,10 +3744,9 @@ public final class Settings {
         public static final String STATUSBAR_BATTERY_BAR_CHARGING_COLOR = "statusbar_battery_bar_charging_color";
 
         /**
-         * Whether to show Brightness Icon On Brightness Slider
          * @hide
          */
-        public static final String QS_SHOW_BRIGHTNESS_ICON = "qs_show_brightness_icon";
+        public static final String STATUSBAR_BATTERY_BAR_BATTERY_LOW_COLOR = "statusbar_battery_bar_battery_low_color";
 
         /**
          * @hide
@@ -3763,6 +3762,12 @@ public final class Settings {
          * @hide
          */
         public static final String STATUSBAR_BATTERY_BAR_ANIMATE = "statusbar_battery_bar_animate";
+
+        /**
+         * Whether to show Brightness Icon On Brightness Slider
+         * @hide
+         */
+        public static final String QS_SHOW_BRIGHTNESS_ICON = "qs_show_brightness_icon";
 
         /** @hide */
         public static final Validator EGG_MODE_VALIDATOR = new Validator() {
@@ -3782,6 +3787,18 @@ public final class Settings {
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
          * the setting value. See an example above.
          */
+
+        /**
+         * Dashboard portrait columns in settings
+         * @hide
+         */
+        public static final String DASHBOARD_PORTRAIT_COLUMNS = "dashboard_portrait_columns";
+
+        /**
+         * Dashboard landscape columns in settings
+         * @hide
+         */
+        public static final String DASHBOARD_LANDSCAPE_COLUMNS = "dashboard_landscape_columns";
 
         /**
          * Disable dashboard conditions in settings
@@ -4163,6 +4180,12 @@ public final class Settings {
         public static final String LOCK_SCREEN_SHOW_WEATHER_LOCATION = "lock_screen_show_weather_location";
 
         /**
+        * Whether volume control media sound stream
+        * @hide
+        */
+        public static final String VOLUME_KEY_CONTROL_MEDIA = "volume_key_control_media";
+
+        /**
          * Whether to show the weather update timestamp on the lock screen
          * @hide
          */
@@ -4265,6 +4288,53 @@ public final class Settings {
          * @hide
          */
         public static final String DOUBLE_TAP_SLEEP_ANYWHERE = "double_tap_sleep_anywhere";
+
+        /**
+         * Display second in the Clock
+         * @hide
+         */
+        public static final String CLOCK_USE_SECOND = "clock_use_second";
+
+        /**
+         * Settings for clock font style
+         * @hide
+         */
+        public static final String STATUSBAR_CLOCK_FONT_STYLE = "statusbar_clock_font_style";
+
+        /**
+         * Change fonts for the system lockscreen clock widget
+         *
+         * @hide
+         */
+        public static final String LOCK_CLOCK_FONTS = "lock_clock_fonts";
+
+        /**
+         * Change the color of the lockscreen owner's info text
+         *
+         * @hide
+         */
+        public static final String LOCKSCREEN_OWNER_INFO_COLOR = "lockscreen_owner_info_color";
+
+        /**
+         * Change the color of the lockscreen alarm text
+         *
+         * @hide
+         */
+        public static final String LOCKSCREEN_ALARM_COLOR = "lockscreen_alarm_color";
+
+        /**
+         * Change the color of the lockscreen clock
+         *
+         * @hide
+         */
+        public static final String LOCKSCREEN_CLOCK_COLOR = "lockscreen_clock_color";
+
+        /**
+         * Change the color of the lockscreen date underneath the clock
+         *
+         * @hide
+         */
+        public static final String LOCKSCREEN_CLOCK_DATE_COLOR = "lockscreen_clock_date_color";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
@@ -9699,6 +9769,24 @@ public final class Settings {
          * @hide
          */
         public static final String DATABASE_DOWNGRADE_REASON = "database_downgrade_reason";
+
+        /**
+         * Whether to sound when charger power is connected/disconnected
+         * @hide
+         */
+        public static final String POWER_NOTIFICATIONS_ENABLED = "power_notifications_enabled";
+
+        /**
+         * Whether to vibrate when charger power is connected/disconnected
+         * @hide
+         */
+        public static final String POWER_NOTIFICATIONS_VIBRATE = "power_notifications_vibrate";
+
+        /**
+         * URI for power notification sounds
+         * @hide
+         */
+        public static final String POWER_NOTIFICATIONS_RINGTONE = "power_notifications_ringtone";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
