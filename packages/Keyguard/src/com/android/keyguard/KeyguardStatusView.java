@@ -81,6 +81,7 @@ private WeatherController mWeatherController;
         @Override
         public void onTimeChanged() {
             refresh();
+            refreshClockColors();
         }
 
         @Override
@@ -89,6 +90,7 @@ private WeatherController mWeatherController;
                 if (DEBUG) Slog.v(TAG, "refresh statusview showing:" + showing);
                 refresh();
                 updateOwnerInfo();
+                refreshClockColors();
             }
         }
 
@@ -107,6 +109,7 @@ private WeatherController mWeatherController;
         public void onUserSwitchComplete(int userId) {
             refresh();
             updateOwnerInfo();
+            refreshClockColors();
         }
     };
 
@@ -152,6 +155,7 @@ private WeatherController mWeatherController;
         boolean shouldMarquee = KeyguardUpdateMonitor.getInstance(mContext).isDeviceInteractive();
         setEnableMarquee(shouldMarquee);
         refresh();
+        refreshClockColors();
         updateOwnerInfo();
 
         // Disable elegant text height because our fancy colon makes the ymin value huge for no
