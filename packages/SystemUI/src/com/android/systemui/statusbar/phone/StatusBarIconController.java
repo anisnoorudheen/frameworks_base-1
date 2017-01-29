@@ -86,6 +86,7 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
     private View mCenterClockLayout;
     private NetworkTraffic mNetworkTraffic;
     private TextView mCarrierLabel;
+    private int mCarrierLabelColor;
 
     // StatusBar Weather
     private TextView mWeather;
@@ -566,9 +567,15 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
         mSignalCluster.setIconTint(mIconTint, mDarkIntensity, mTintArea);
         mBatteryMeterView.setDarkIntensity(
                 isInArea(mTintArea, mBatteryMeterView) ? mDarkIntensity : 0);
-        mCarrierLabel.setTextColor(getTint(mTintArea, mCarrierLabel, mIconTint));
         mClockController.setTextColor(mIconTint);
 	mNetworkTraffic.setDarkIntensity(mDarkIntensity);
+        if (Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_CARRIER_COLOR,
+                mContext.getResources().getColor(R.color.status_bar_clock_color),
+                UserHandle.USER_CURRENT) == mContext.getResources().
+                getColor(R.color.status_bar_clock_color)) {
+            mCarrierLabel.setTextColor(mIconTint);
+        }
         mBatteryLevelView.setTextColor(getTint(mTintArea, mBatteryLevelView, mIconTint));
         if (Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.STATUS_BAR_WEATHER_COLOR, 0xFFFFFFFF,
