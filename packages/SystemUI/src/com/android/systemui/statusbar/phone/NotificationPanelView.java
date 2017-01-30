@@ -75,6 +75,8 @@ import com.android.systemui.statusbar.stack.StackStateAnimator;
 
 import java.util.List;
 
+import slim.provider.SlimSettings;
+
 public class NotificationPanelView extends PanelView implements
         ExpandableView.OnHeightChangedListener,
         View.OnClickListener, NotificationStackScrollLayout.OnOverscrollTopChangedListener,
@@ -189,8 +191,6 @@ public class NotificationPanelView extends PanelView implements
     private boolean mQsTouchAboveFalsingThreshold;
     private int mQsFalsingThreshold;
 
-    private Handler mHandler = new Handler();
-    private SettingsObserver mSettingsObserver;
     private int mOneFingerQuickSettingsIntercept;
 
     private float mKeyguardStatusBarAnimateAlpha = 1f;
@@ -218,6 +218,10 @@ public class NotificationPanelView extends PanelView implements
         }
     };
     private NotificationGroupManager mGroupManager;
+
+    private Handler mHandler = new Handler();
+    private SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);;
+    private boolean mDozeWakeupDoubleTap;
 
     private boolean mDoubleTapToSleepEnabled;
     private boolean mDoubleTapToSleepAnywhere;
@@ -792,7 +796,10 @@ public class NotificationPanelView extends PanelView implements
         }
         if ((!mIsExpanding || mHintAnimationRunning)
                 && !mQsExpanded
-                && mStatusBar.getBarState() != StatusBarState.SHADE) {
+                && mStatusBar.getBarState() != StatusBarState.SHADE
+                && !(mDozeWakeupDoubleTap
+                     && mStatusBarState == StatusBarState.KEYGUARD
+                     && mStatusBar.isDozing())) {
             mAfforanceHelper.onTouchEvent(event);
         }
         if (mOnlyAffordanceInThisMotion) {
@@ -2441,6 +2448,8 @@ public class NotificationPanelView extends PanelView implements
                     Settings.System.DOUBLE_TAP_SLEEP_GESTURE), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_ANYWHERE), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(SlimSettings.System.getUriFor(
+                    SlimSettings.System.DOZE_WAKEUP_DOUBLETAP), false, this, UserHandle.USER_ALL);
             update();
         }
 
