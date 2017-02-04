@@ -25,4 +25,11 @@
     <!-- Battery charging color -->
     <color name="system_primary_color">#ff263238</color><!-- blue grey 900 -->
 
+    <!-- Floating action button -->
+    <color name="fab_color">@*android:color/material_deep_teal_500</color>
+    <color name="floating_action_button_icon_color">#ffffff</color>
+
+    <!-- Alarm status color -->
+    <color name="alarm_status_color">#E0E0E0</color>
+
 </resources>
