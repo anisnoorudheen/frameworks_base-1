@@ -48,6 +48,7 @@ public abstract class KeyguardPinBasedInputView extends KeyguardAbsKeyInputView
     private View mButton9;
 
     private boolean mQuickUnlock;
+    private int mQuickUnlock_PIN_Length = 4; // Default Length = 4
 
     public KeyguardPinBasedInputView(Context context) {
         this(context, null);
@@ -178,7 +179,7 @@ public abstract class KeyguardPinBasedInputView extends KeyguardAbsKeyInputView
     // Listener callback.
     @Override
     public void onTextChanged() {
-        if (mQuickUnlock && getPasswordText().length() == 4) { // Limit Quickunlock to 4 digits PIN
+        if (mQuickUnlock && (mQuickUnlock_PIN_Length != 0) && getPasswordText().length() == mQuickUnlock_PIN_Length) {
             performClick(mOkButton);
         }
     }
@@ -201,6 +202,9 @@ public abstract class KeyguardPinBasedInputView extends KeyguardAbsKeyInputView
 
         mQuickUnlock = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.LOCKSCREEN_QUICK_UNLOCK_CONTROL, 0, UserHandle.USER_CURRENT) == 1;
+
+        mQuickUnlock_PIN_Length = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOCKSCREEN_QUICK_UNLOCK_PIN_LENGTH, 4);
 
         mOkButton = findViewById(R.id.key_enter);
         if (mOkButton != null) {
