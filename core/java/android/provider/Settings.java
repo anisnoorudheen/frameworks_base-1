@@ -6896,6 +6896,12 @@ public final class Settings {
         public static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "lockscreen_quick_unlock_control";
 
         /**
+         * What PIN length to use for quick unlock
+         * @hide
+         */
+        public static final String LOCKSCREEN_QUICK_UNLOCK_PIN_LENGTH = "lockscreen_quick_unlock_pin_length";
+
+        /**
          * Names of the service components that the current user has explicitly allowed to
          * see all of the user's notifications, separated by ':'.
          *
@@ -7352,6 +7358,7 @@ public final class Settings {
             DOZE_PULSE_ON_PICK_UP,
             DOZE_PULSE_ON_DOUBLE_TAP,
             LOCKSCREEN_QUICK_UNLOCK_CONTROL,
+            LOCKSCREEN_QUICK_UNLOCK_PIN_LENGTH,
             STATUS_BAR_SHOW_BATTERY_PERCENT,
             STATUS_BAR_BATTERY_STYLE,
             STATUS_BAR_BATTERY_STYLE_TILE
