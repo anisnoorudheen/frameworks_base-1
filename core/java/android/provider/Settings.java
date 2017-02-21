@@ -3941,6 +3941,12 @@ public final class Settings {
         public static final String NETWORK_TRAFFIC_HIDEARROW = "network_traffic_hidearrow";
 
         /**
+         * Whether to show the IME switcher in the status bar
+         * @hide
+         */
+        public static final String STATUS_BAR_IME_SWITCHER = "status_bar_ime_switcher";
+
+        /**
          * Whether to allow fullscreen screenshots or let the user select which area to screenshot
          *
          */
@@ -4120,7 +4126,7 @@ public final class Settings {
           * @hide
           */
          public static final String LOCKSCREEN_BATTERY_INFO = "lockscreen_battery_info";
- 
+
         /**
          * Whether to display the gesture anywhere trigger region or not.
          * Used internally for showing the trigger in settings so user can see its placement
@@ -4529,7 +4535,7 @@ public final class Settings {
          * @hide
          */
         public static final String STATUS_BAR_CARRIER_FONT_STYLE = "status_bar_carrier_font_style";
- 
+
         /**
          * @hide
          */
