@@ -47,6 +47,7 @@ import com.android.systemui.Interpolators;
 import com.android.systemui.R;
 import com.android.systemui.SystemUIFactory;
 import com.android.systemui.statusbar.NotificationData;
+import com.android.systemui.statusbar.phone.TickerView;
 import com.android.systemui.statusbar.SignalClusterView;
 import com.android.systemui.statusbar.StatusBarIconView;
 import com.android.systemui.statusbar.policy.NetworkTraffic;
@@ -86,6 +87,7 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
     private View mCenterClockLayout;
     private NetworkTraffic mNetworkTraffic;
     private TextView mCarrierLabel;
+    private TickerView mNotificationTicker;
     private int mCarrierLabelColor;
 
     // StatusBar Weather
@@ -153,6 +155,7 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
 
         mNetworkTraffic = (NetworkTraffic) statusBar.findViewById(R.id.networkTraffic);
         mCarrierLabel = (TextView) statusBar.findViewById(R.id.statusbar_carrier_text);
+        mNotificationTicker = (TickerView) statusBar.findViewById(R.id.tickerText);
         mWeather = (TextView) statusBar.findViewById(R.id.weather_temp);
 	mWeatherLeft = (TextView) statusBar.findViewById(R.id.left_weather_temp);
         mDarkModeIconColorSingleTone = context.getColor(R.color.dark_mode_icon_color_single_tone);
@@ -577,7 +580,7 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
             mCarrierLabel.setTextColor(mIconTint);
         }
         mBatteryLevelView.setTextColor(getTint(mTintArea, mBatteryLevelView, mIconTint));
-        if (Settings.System.getIntForUser(mContext.getContentResolver(),
+        if (mNotificationTicker != null) mNotificationTicker.setDarkIntensity(mDarkIntensity);
                 Settings.System.STATUS_BAR_WEATHER_COLOR, 0xFFFFFFFF,
                 UserHandle.USER_CURRENT) == 0xFFFFFFFF) {
         mWeather.setTextColor(mIconTint);
