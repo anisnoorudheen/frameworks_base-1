@@ -61,6 +61,7 @@ public abstract class Ticker {
     private int mTickerTextColor;
     private int mTickerFontSize = 14;
     private Typeface mFontStyle;
+    private int mTextColor = 0xffffffff;
     private int mDarkModeFillColor;
     private int mLightModeFillColor;
 
