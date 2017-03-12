@@ -580,11 +580,12 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
             mCarrierLabel.setTextColor(mIconTint);
         }
         mBatteryLevelView.setTextColor(getTint(mTintArea, mBatteryLevelView, mIconTint));
-        if (mNotificationTicker != null) mNotificationTicker.setDarkIntensity(mDarkIntensity);
+        if (Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.STATUS_BAR_WEATHER_COLOR, 0xFFFFFFFF,
                 UserHandle.USER_CURRENT) == 0xFFFFFFFF) {
         mWeather.setTextColor(mIconTint);
         mWeatherLeft.setTextColor(mIconTint);
+        if (mNotificationTicker != null) mNotificationTicker.setDarkIntensity(mDarkIntensity);
         }
     }
 
