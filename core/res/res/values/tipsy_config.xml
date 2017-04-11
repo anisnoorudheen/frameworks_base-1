@@ -24,4 +24,8 @@
     <!-- Automatic brightness enhancements -->
     <integer name="config_autoBrightnessBrighteningLightFastDebounce">500</integer>
 
+    <!-- call removeCient in cancelAuthentification after stop to
+        avoid 3s delay for certain fpc HALs -->
+    <bool name="config_fingerprintRemoveClientOnCancel">false</bool>
+
 </resources>
