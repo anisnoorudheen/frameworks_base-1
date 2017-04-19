@@ -232,7 +232,7 @@ import java.util.Map;
 
 public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         DragDownHelper.DragDownCallback, ActivityStarter, OnUnlockMethodChangedListener,
-        HeadsUpManager.OnHeadsUpChangedListener , WeatherController.Callback, VisualStabilityManager.Callback {
+        OnHeadsUpChangedListener , WeatherController.Callback, VisualStabilityManager.Callback {
     static final String TAG = "PhoneStatusBar";
     public static final boolean DEBUG = BaseStatusBar.DEBUG;
     public static final boolean SPEW = false;
