@@ -34,4 +34,7 @@
    <!-- Config IME switcher -->
    <bool name="config_show_IMESwitcher">true</bool>
 
+    <!-- Wether device has dash charging support -->
+    <bool name="config_hasDashCharger">false</bool>
+
 </resources>
