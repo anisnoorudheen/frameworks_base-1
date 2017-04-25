@@ -21,4 +21,7 @@
           android:width="@dimen/keyguard_lockscreen_outerring_diameter" />
     <solid android:color="#00000000" />
     <stroke android:color="#1affffff" android:width="2dp" />
+
+    <!-- Wether device has dash charging support -->
+    <bool name="config_hasDashCharger">false</bool>
 </shape>
