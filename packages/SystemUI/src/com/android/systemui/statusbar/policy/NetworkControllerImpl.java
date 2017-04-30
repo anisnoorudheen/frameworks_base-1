@@ -869,7 +869,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
         boolean alwaysShowCdmaRssi = false;
         boolean show4gForLte = false;
         boolean hideLtePlus = false;
-        boolean hspapDataDistinguishable;
+        boolean hspaDataDistinguishable;
 
         static Config readConfig(Context context) {
             Config config = new Config();
