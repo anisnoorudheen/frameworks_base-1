@@ -4342,6 +4342,12 @@ public final class Settings {
         public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
 
         /**
+         * Statusbar Tipsy logo
+         * @hide
+         */
+        public static final String STATUS_BAR_TIPSY_LOGO = "status_bar_tipsy_logo";
+
+        /**
          * custom carrier label. The value is
          * String.
          */

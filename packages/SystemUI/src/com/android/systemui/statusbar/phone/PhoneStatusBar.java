@@ -451,6 +451,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private TextView mCarrierLabel;
     boolean mExpandedVisible;
 
+    // Tipsy logo
+    private boolean mTipsyLogo;
+    private ImageView tipsyLogo;
+
     private int mNavigationBarWindowState = WINDOW_STATE_SHOWING;
 
     // the tracker view
@@ -565,6 +569,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.QS_COLUMNS_LANDSCAPE),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_TIPSY_LOGO),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_SHOW_CARRIER),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -664,6 +671,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         public void update() {
             ContentResolver resolver = mContext.getContentResolver();
+
+            mTipsyLogo = Settings.System.getIntForUser(resolver,
+                    Settings.System.STATUS_BAR_TIPSY_LOGO, 0, mCurrentUserId) == 1;
+            showTipsyLogo(mTipsyLogo);
 
             mShowCarrierLabel = Settings.System.getIntForUser(resolver,
                     Settings.System.STATUS_BAR_SHOW_CARRIER, 1, UserHandle.USER_CURRENT);
@@ -4259,6 +4270,15 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             }
         }, cancelAction, afterKeyguardGone);
     }
+
+    public void showTipsyLogo(boolean show) {
+          if (mStatusBarView == null) return;
+          ContentResolver resolver = mContext.getContentResolver();
+          tipsyLogo = (ImageView) mStatusBarView.findViewById(R.id.tipsy_logo);
+          if (tipsyLogo != null) {
+              tipsyLogo.setVisibility(show ? (mTipsyLogo ? View.VISIBLE : View.GONE) : View.GONE);
+          }
+     }
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
