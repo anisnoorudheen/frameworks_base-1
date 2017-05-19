@@ -4293,6 +4293,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
           ContentResolver resolver = mContext.getContentResolver();
 
           switch(mTipsyLogoStyle) {
+              // Cheerz Bro
+              case 1:
+                  logo = mContext.getResources().getDrawable(R.drawable.ic_status_bar_tipsy_logo_cheerz);
+                  break;
+              // Tipsy Mug or Default
               case 0:
               default:
                   logo = mContext.getResources().getDrawable(R.drawable.ic_status_bar_tipsy_logo);

@@ -56,10 +56,12 @@
     <!-- Tipsy Logo -->
     <string-array name="status_bar_tipsy_logo_style_entries">
         <item>Tipsy Mug</item>
+        <item>Cheerz Bro</item>
     </string-array>
 
     <string-array name="status_bar_tipsy_logo_style_values" translatable="false">
         <item>0</item>
+        <item>1</item>
     </string-array>
 
 </resources>
