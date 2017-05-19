@@ -454,6 +454,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     // Tipsy logo
     private boolean mTipsyLogo;
     private ImageView tipsyLogo;
+    private int mTipsyLogoStyle;
 
     private int mNavigationBarWindowState = WINDOW_STATE_SHOWING;
 
@@ -572,6 +573,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.STATUS_BAR_TIPSY_LOGO),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_SHOW_CARRIER),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -659,7 +663,16 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                         Settings.System.STATUS_BAR_SHOW_TICKER,
                         0, UserHandle.USER_CURRENT) == 1;
                 initTickerView(); 
+           } else if ((uri.equals(Settings.System.getUriFor(
+                        Settings.System.STATUS_BAR_TIPSY_LOGO))) ||
+                      (uri.equals(Settings.System.getUriFor(
+                        Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE)))) {
+               mTipsyLogo = Settings.System.getIntForUser(
+                        mContext.getContentResolver(),
+                       Settings.System.STATUS_BAR_TIPSY_LOGO, 0, mCurrentUserId) == 1;
            }
+
+
 
            update();
         }
@@ -674,6 +687,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
             mTipsyLogo = Settings.System.getIntForUser(resolver,
                     Settings.System.STATUS_BAR_TIPSY_LOGO, 0, mCurrentUserId) == 1;
+            mTipsyLogoStyle = Settings.System.getIntForUser(resolver,
+                    Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE, 0, UserHandle.USER_CURRENT);
             showTipsyLogo(mTipsyLogo);
 
             mShowCarrierLabel = Settings.System.getIntForUser(resolver,
@@ -4272,10 +4287,28 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     }
 
     public void showTipsyLogo(boolean show) {
+          Drawable logo = null;
+
           if (mStatusBarView == null) return;
           ContentResolver resolver = mContext.getContentResolver();
+
+          switch(mTipsyLogoStyle) {
+              case 0:
+              default:
+                  logo = mContext.getResources().getDrawable(R.drawable.ic_status_bar_tipsy_logo);
+                  break;
+          }
+
           tipsyLogo = (ImageView) mStatusBarView.findViewById(R.id.tipsy_logo);
           if (tipsyLogo != null) {
+              if (logo == null) {
+                  // Something wrong. Do not show anything
+                  tipsyLogo.setImageDrawable(logo);
+                  tipsyLogo.setVisibility(View.GONE);
+                  return;
+              }
+
+              tipsyLogo.setImageDrawable(logo);
               tipsyLogo.setVisibility(show ? (mTipsyLogo ? View.VISIBLE : View.GONE) : View.GONE);
           }
      }

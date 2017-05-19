@@ -52,4 +52,14 @@
         <item>0</item><item>3</item>
         <item>3</item><item>3</item>
     </array>
+
+    <!-- Tipsy Logo -->
+    <string-array name="status_bar_tipsy_logo_style_entries">
+        <item>Tipsy Mug</item>
+    </string-array>
+
+    <string-array name="status_bar_tipsy_logo_style_values" translatable="false">
+        <item>0</item>
+    </string-array>
+
 </resources>
