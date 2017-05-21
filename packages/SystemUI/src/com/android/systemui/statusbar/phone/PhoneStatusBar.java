@@ -669,7 +669,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                         Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE)))) {
                mTipsyLogo = Settings.System.getIntForUser(
                         mContext.getContentResolver(),
-                       Settings.System.STATUS_BAR_TIPSY_LOGO, 0, mCurrentUserId) == 1;
+                       Settings.System.STATUS_BAR_TIPSY_LOGO, 0, UserHandle.USER_CURRENT) == 1;
            }
 
 
@@ -686,7 +686,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             ContentResolver resolver = mContext.getContentResolver();
 
             mTipsyLogo = Settings.System.getIntForUser(resolver,
-                    Settings.System.STATUS_BAR_TIPSY_LOGO, 0, mCurrentUserId) == 1;
+                    Settings.System.STATUS_BAR_TIPSY_LOGO, 0, UserHandle.USER_CURRENT) == 1;
             mTipsyLogoStyle = Settings.System.getIntForUser(resolver,
                     Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE, 0, UserHandle.USER_CURRENT);
             showTipsyLogo(mTipsyLogo);
@@ -1281,6 +1281,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mCarrierLabel = (TextView) mStatusBarWindow.findViewById(R.id.statusbar_carrier_text);
         if (mCarrierLabel != null) {
             updateCarrier();
+        }
+
+        tipsyLogo = (ImageView) mStatusBarWindow.findViewById(R.id.tipsy_logo);
+        if (tipsyLogo != null) {
+            showTipsyLogo(mTipsyLogo);
         }
 
         mFlashlightController = new FlashlightController(mContext);
@@ -5135,6 +5140,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         updateNotifications();
         checkBarModes();
         updateCarrier();
+        showTipsyLogo(mTipsyLogo);
         updateMediaMetaData(false, mState != StatusBarState.KEYGUARD);
         mKeyguardMonitor.notifyKeyguardState(mStatusBarKeyguardViewManager.isShowing(),
                 mStatusBarKeyguardViewManager.isSecure(),
