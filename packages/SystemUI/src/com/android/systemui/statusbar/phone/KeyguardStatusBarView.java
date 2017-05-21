@@ -104,6 +104,12 @@ public class KeyguardStatusBarView extends RelativeLayout
     private int mSystemIconsBaseMargin;
     private View mSystemIconsContainer;
 
+
+    // Tipsy logo
+    private boolean mTipsyLogo;
+    private ImageView tipsyLogo;
+    private int mTipsyLogoStyle;
+
     private boolean mShowBatteryText;
     private boolean mForceBatteryText;
     private boolean mForceChargeBatteryText;
@@ -114,6 +120,7 @@ public class KeyguardStatusBarView extends RelativeLayout
     private ContentObserver mObserver = new ContentObserver(new Handler()) {
         public void onChange(boolean selfChange, Uri uri) {
             showStatusBarCarrier();
+            getTipsyLogo();
             updateVisibilities();
         }
     };
@@ -121,6 +128,7 @@ public class KeyguardStatusBarView extends RelativeLayout
     public KeyguardStatusBarView(Context context, AttributeSet attrs) {
         super(context, attrs);
         showStatusBarCarrier();
+        getTipsyLogo();
     }
 
     private void showStatusBarCarrier() {
@@ -132,6 +140,46 @@ public class KeyguardStatusBarView extends RelativeLayout
                 UserHandle.USER_CURRENT);
     }
 
+    private void getTipsyLogo() {
+        ContentResolver resolver = getContext().getContentResolver();
+        mTipsyLogo = Settings.System.getIntForUser(resolver,
+                Settings.System.STATUS_BAR_TIPSY_LOGO, 0, UserHandle.USER_CURRENT) == 1;
+        mTipsyLogoStyle = Settings.System.getIntForUser(resolver,
+                Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE, 0, UserHandle.USER_CURRENT);
+    }
+
+    public void showTipsyLogo(boolean show) {
+          Drawable logo = null;
+
+          ContentResolver resolver = mContext.getContentResolver();
+
+          switch(mTipsyLogoStyle) {
+              // Cheerz Bro
+              case 1:
+                  logo = mContext.getResources().getDrawable(R.drawable.ic_status_bar_tipsy_logo_cheerz);
+                  break;
+              // Tipsy Mug or Default
+              case 0:
+              default:
+                  logo = mContext.getResources().getDrawable(R.drawable.ic_status_bar_tipsy_logo);
+                  break;
+          }
+
+          tipsyLogo = (ImageView) findViewById(R.id.keyguard_tipsy_logo);
+          if (tipsyLogo != null) {
+              if (logo == null) {
+                  // Something wrong. Do not show anything
+                  tipsyLogo.setImageDrawable(logo);
+                  tipsyLogo.setVisibility(View.GONE);
+                  return;
+              }
+
+              tipsyLogo.setImageDrawable(logo);
+              tipsyLogo.setVisibility(show ? (mTipsyLogo ? View.VISIBLE : View.GONE) : View.GONE);
+          }
+     }
+
+
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
@@ -141,6 +189,7 @@ public class KeyguardStatusBarView extends RelativeLayout
         mMultiUserAvatar = (ImageView) findViewById(R.id.multi_user_avatar);
         mBatteryLevel = (TextView) findViewById(R.id.battery_level);
         mCarrierLabel = (TextView) findViewById(R.id.keyguard_carrier_text);
+        tipsyLogo = (ImageView) findViewById(R.id.keyguard_tipsy_logo);
         loadDimens();
         updateUserSwitcher();
     }
@@ -197,6 +246,11 @@ public class KeyguardStatusBarView extends RelativeLayout
                 getResources().getDimensionPixelSize(R.dimen.keyguard_carrier_text_margin));
         mCarrierLabel.setLayoutParams(lp);
 
+        lp = (MarginLayoutParams) tipsyLogo.getLayoutParams();
+        lp.setMarginStart(
+                getResources().getDimensionPixelSize(R.dimen.keyguard_tipsy_logo_margin));
+        tipsyLogo.setLayoutParams(lp);
+
         lp = (MarginLayoutParams) getLayoutParams();
         lp.height =  getResources().getDimensionPixelSize(
                 R.dimen.status_bar_header_height_keyguard);
@@ -247,6 +301,8 @@ public class KeyguardStatusBarView extends RelativeLayout
             getFontStyle(mCarrierLabelFontStyle);
 
             }
+
+        showTipsyLogo(mTipsyLogo);
         }
 
     public void getFontStyle(int font) {
@@ -555,6 +611,10 @@ public class KeyguardStatusBarView extends RelativeLayout
 		Settings.System.STATUS_BAR_SHOW_CARRIER), false, mObserver);
         getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
                 Settings.System.STATUS_BAR_CARRIER_FONT_STYLE), false, mObserver);
+        getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                Settings.System.STATUS_BAR_TIPSY_LOGO), false, mObserver);
+        getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE), false, mObserver);
     }
 
     @Override
