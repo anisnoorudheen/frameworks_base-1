@@ -4342,10 +4342,10 @@ public final class Settings {
         public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
 
         /**
-         * Statusbar Tipsy logo
+         * Statusbar Tipsy logo Position
          * @hide
          */
-        public static final String STATUS_BAR_TIPSY_LOGO = "status_bar_tipsy_logo";
+        public static final String STATUS_BAR_TIPSY_LOGO_POSITION = "status_bar_tipsy_logo_position";
 
         /**
          * Statusbar Tipsy logo Style

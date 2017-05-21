@@ -37,11 +37,11 @@ public class TunerFragment extends PreferenceFragment
 
     private static final String TAG = "TunerFragment";
 
-    private static final String STATUS_BAR_TIPSY_LOGO = "status_bar_tipsy_logo";
     private static final String STATUS_BAR_TIPSY_LOGO_STYLE = "status_bar_tipsy_logo_style";
+    private static final String STATUS_BAR_TIPSY_LOGO_POSITION = "status_bar_tipsy_logo_position";
 
-    private SwitchPreference mTipsyLogo;
     private ListPreference mTipsyLogoStyle;
+    private ListPreference mTipsyLogoPosition;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,15 +51,17 @@ public class TunerFragment extends PreferenceFragment
 
         final ContentResolver resolver = getActivity().getContentResolver();
 
-        mTipsyLogo = (SwitchPreference) findPreference(STATUS_BAR_TIPSY_LOGO);
-        mTipsyLogo.setChecked((Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_TIPSY_LOGO, 0) == 1));
-
         mTipsyLogoStyle = (ListPreference) findPreference(STATUS_BAR_TIPSY_LOGO_STYLE);
         mTipsyLogoStyle.setOnPreferenceChangeListener(this);
         mTipsyLogoStyle.setValue(Integer.toString(Settings.System.getInt(resolver,
                 Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE, 0)));
         mTipsyLogoStyle.setSummary(mTipsyLogoStyle.getEntry());
+
+        mTipsyLogoPosition = (ListPreference) findPreference(STATUS_BAR_TIPSY_LOGO_POSITION);
+        mTipsyLogoPosition.setOnPreferenceChangeListener(this);
+        mTipsyLogoPosition.setValue(Integer.toString(Settings.System.getInt(resolver,
+                Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, 0)));
+        mTipsyLogoPosition.setSummary(mTipsyLogoPosition.getEntry());
     }
 
     @Override
@@ -99,17 +101,19 @@ public class TunerFragment extends PreferenceFragment
 	    mTipsyLogoStyle.setSummary(mTipsyLogoStyle.getEntries()[index]);
 	    return true;
 	}
+	if (preference == mTipsyLogoPosition) {
+	    int val = Integer.parseInt((String) newValue);
+	    int index = mTipsyLogoPosition.findIndexOfValue((String) newValue);
+	    Settings.System.putInt(resolver,
+		    Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, val);
+	    mTipsyLogoPosition.setSummary(mTipsyLogoPosition.getEntries()[index]);
+	    return true;
+	}
 	return false;
     }
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if  (preference == mTipsyLogo) {
-            boolean checked = ((SwitchPreference)preference).isChecked();
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.STATUS_BAR_TIPSY_LOGO, checked ? 1:0);
-            return true;
-          }
         return super.onPreferenceTreeClick(preference);
     }
 }

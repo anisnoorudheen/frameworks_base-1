@@ -64,4 +64,19 @@
         <item>1</item>
     </string-array>
 
+    <!-- Tipsy Logo Placement -->
+    <string-array name="status_bar_tipsy_logo_position_entries">
+        <item>Disabled</item>
+        <item>Statusbar Only</item>
+        <item>Lockscreen Only</item>
+        <item>Lockscreen and Statusbar</item>
+    </string-array>
+
+    <string-array name="status_bar_tipsy_logo_position_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
 </resources>
