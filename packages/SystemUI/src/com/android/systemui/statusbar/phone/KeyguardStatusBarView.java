@@ -109,6 +109,7 @@ public class KeyguardStatusBarView extends RelativeLayout
     private boolean mTipsyLogo;
     private ImageView tipsyLogo;
     private int mTipsyLogoStyle;
+    private int mTipsyLogoPosition;
 
     private boolean mShowBatteryText;
     private boolean mForceBatteryText;
@@ -142,16 +143,27 @@ public class KeyguardStatusBarView extends RelativeLayout
 
     private void getTipsyLogo() {
         ContentResolver resolver = getContext().getContentResolver();
-        mTipsyLogo = Settings.System.getIntForUser(resolver,
-                Settings.System.STATUS_BAR_TIPSY_LOGO, 0, UserHandle.USER_CURRENT) == 1;
         mTipsyLogoStyle = Settings.System.getIntForUser(resolver,
                 Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE, 0, UserHandle.USER_CURRENT);
+        mTipsyLogoPosition = Settings.System.getIntForUser(resolver,
+                Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, 0, UserHandle.USER_CURRENT);
     }
 
-    public void showTipsyLogo(boolean show) {
+    public void showTipsyLogo() {
           Drawable logo = null;
 
           ContentResolver resolver = mContext.getContentResolver();
+
+          /* Check if the logo is disabled
+           * Also should be enabled for lockscreen
+           */
+          if ((mTipsyLogoPosition == 0) ||
+              ((mTipsyLogoPosition != 2) && (mTipsyLogoPosition != 3))) {
+              if (tipsyLogo != null) {
+                  tipsyLogo.setVisibility(View.GONE);
+              }
+              return;
+          }
 
           switch(mTipsyLogoStyle) {
               // Cheerz Bro
@@ -175,7 +187,7 @@ public class KeyguardStatusBarView extends RelativeLayout
               }
 
               tipsyLogo.setImageDrawable(logo);
-              tipsyLogo.setVisibility(show ? (mTipsyLogo ? View.VISIBLE : View.GONE) : View.GONE);
+              tipsyLogo.setVisibility(View.VISIBLE);
           }
      }
 
@@ -302,7 +314,7 @@ public class KeyguardStatusBarView extends RelativeLayout
 
             }
 
-        showTipsyLogo(mTipsyLogo);
+        showTipsyLogo();
         }
 
     public void getFontStyle(int font) {
@@ -612,9 +624,9 @@ public class KeyguardStatusBarView extends RelativeLayout
         getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
                 Settings.System.STATUS_BAR_CARRIER_FONT_STYLE), false, mObserver);
         getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
-                Settings.System.STATUS_BAR_TIPSY_LOGO), false, mObserver);
-        getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE), false, mObserver);
+        getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION), false, mObserver);
     }
 
     @Override
