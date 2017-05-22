@@ -170,6 +170,26 @@ public class KeyguardStatusBarView extends RelativeLayout
               case 1:
                   logo = mContext.getResources().getDrawable(R.drawable.ic_status_bar_tipsy_logo_cheerz);
                   break;
+              // Tipsy Letters
+              case 2:
+                  logo = mContext.getResources().getDrawable(R.drawable.ic_status_bar_tipsy_logo_letters);
+                  break;
+              // Tipsy Bottle
+              case 3:
+                  logo = mContext.getResources().getDrawable(R.drawable.ic_status_bar_tipsy_logo_bottle);
+                  break;
+              // GZR Skull
+              case 4:
+                  logo = mContext.getResources().getDrawable(R.drawable.ic_status_bar_gzr_skull_logo);
+                  break;
+              // GZR Circle
+              case 5:
+                  logo = mContext.getResources().getDrawable(R.drawable.ic_status_bar_gzr_circle_logo);
+                  break;
+              // Clown
+              case 6:
+                  logo = mContext.getResources().getDrawable(R.drawable.ic_status_bar_clown_logo);
+                  break;
               // Tipsy Mug or Default
               case 0:
               default:
