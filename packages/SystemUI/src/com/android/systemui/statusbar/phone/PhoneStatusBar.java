@@ -4311,6 +4311,14 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
               return;
           }
 
+          // do not show when the statusbar state is KEYGUARD
+          if (isFalsingThresholdNeeded() == true) {
+              if (tipsyLogo != null) {
+                  tipsyLogo.setVisibility(View.GONE);
+              }
+              return;
+          }
+
           switch(mTipsyLogoStyle) {
               // Cheerz Bro
               case 1:
