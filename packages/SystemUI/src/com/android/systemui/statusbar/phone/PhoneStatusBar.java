@@ -219,6 +219,7 @@ import com.android.systemui.statusbar.stack.NotificationStackScrollLayout
         .OnChildLocationsChangedListener;
 import com.android.systemui.statusbar.stack.StackStateAnimator;
 import com.android.systemui.volume.VolumeComponent;
+import android.util.TypedValue;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -455,6 +456,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private ImageView tipsyLogo;
     private int mTipsyLogoStyle;
     private int mTipsyLogoPosition;
+    private int mTipsyLogoSize;
 
     private int mNavigationBarWindowState = WINDOW_STATE_SHOWING;
 
@@ -576,6 +578,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_TIPSY_LOGO_SIZE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_SHOW_CARRIER),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -673,6 +678,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                mTipsyLogoPosition = Settings.System.getIntForUser(
                         mContext.getContentResolver(),
                        Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, 0, UserHandle.USER_CURRENT);
+           } else if (uri.equals(Settings.System.getUriFor(
+                        Settings.System.STATUS_BAR_TIPSY_LOGO_SIZE))) {
+               mTipsyLogoSize = Settings.System.getIntForUser(
+                        mContext.getContentResolver(),
+                       Settings.System.STATUS_BAR_TIPSY_LOGO_SIZE, 20, UserHandle.USER_CURRENT);
            }
 
 
@@ -692,6 +702,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE, 0, UserHandle.USER_CURRENT);
             mTipsyLogoPosition = Settings.System.getIntForUser(resolver,
                     Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, 0, UserHandle.USER_CURRENT);
+            mTipsyLogoSize = Settings.System.getIntForUser(resolver,
+                    Settings.System.STATUS_BAR_TIPSY_LOGO_SIZE, 20, UserHandle.USER_CURRENT);
             showTipsyLogo();
 
             mShowCarrierLabel = Settings.System.getIntForUser(resolver,
@@ -4361,6 +4373,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
               }
 
               tipsyLogo.setImageDrawable(logo);
+              int sizeInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                      mTipsyLogoSize, mContext.getResources().getDisplayMetrics());
+              tipsyLogo.getLayoutParams().height = sizeInDp;
+              tipsyLogo.getLayoutParams().width = sizeInDp;
+              tipsyLogo.requestLayout();
               tipsyLogo.setVisibility(View.VISIBLE);
           }
      }

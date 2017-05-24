@@ -4354,6 +4354,12 @@ public final class Settings {
         public static final String STATUS_BAR_TIPSY_LOGO_STYLE = "status_bar_tipsy_logo_style";
 
         /**
+         * Statusbar Tipsy logo Size
+         * @hide
+         */
+        public static final String STATUS_BAR_TIPSY_LOGO_SIZE = "status_bar_tipsy_logo_size";
+
+        /**
          * custom carrier label. The value is
          * String.
          */

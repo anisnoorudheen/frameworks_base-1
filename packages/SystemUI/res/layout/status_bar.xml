@@ -49,11 +49,15 @@
 
         <ImageView
             android:id="@+id/tipsy_logo"
-            android:layout_width="@dimen/status_bar_icon_size"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyguard_tipsy_logo_margin"
+            android:layout_centerVertical="true"
+            android:paddingStart="4dip"
             android:paddingEnd="4dip"
+            android:gravity="center"
             android:src="@drawable/ic_status_bar_tipsy_logo"
-            android:scaleType="center"
+            android:scaleType="centerCrop"
             android:visibility="gone" />
 
         <TextView

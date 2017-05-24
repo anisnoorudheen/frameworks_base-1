@@ -110,6 +110,7 @@ public class KeyguardStatusBarView extends RelativeLayout
     private ImageView tipsyLogo;
     private int mTipsyLogoStyle;
     private int mTipsyLogoPosition;
+    private int mTipsyLogoSize;
 
     private boolean mShowBatteryText;
     private boolean mForceBatteryText;
@@ -147,6 +148,8 @@ public class KeyguardStatusBarView extends RelativeLayout
                 Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE, 0, UserHandle.USER_CURRENT);
         mTipsyLogoPosition = Settings.System.getIntForUser(resolver,
                 Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, 0, UserHandle.USER_CURRENT);
+        mTipsyLogoSize = Settings.System.getIntForUser(resolver,
+                Settings.System.STATUS_BAR_TIPSY_LOGO_SIZE, 20, UserHandle.USER_CURRENT);
     }
 
     public void showTipsyLogo() {
@@ -207,6 +210,11 @@ public class KeyguardStatusBarView extends RelativeLayout
               }
 
               tipsyLogo.setImageDrawable(logo);
+              int sizeInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                      mTipsyLogoSize, mContext.getResources().getDisplayMetrics());
+              tipsyLogo.getLayoutParams().height = sizeInDp;
+              tipsyLogo.getLayoutParams().width = sizeInDp;
+              tipsyLogo.requestLayout();
               tipsyLogo.setVisibility(View.VISIBLE);
           }
      }
@@ -647,6 +655,8 @@ public class KeyguardStatusBarView extends RelativeLayout
                     Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE), false, mObserver);
         getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION), false, mObserver);
+        getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_TIPSY_LOGO_SIZE), false, mObserver);
     }
 
     @Override
