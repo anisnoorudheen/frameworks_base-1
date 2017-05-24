@@ -15,7 +15,6 @@
  */
 package com.android.systemui.tuner;
 
-import android.content.ContentResolver;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,42 +25,18 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.systemui.R;
 
-public class TunerFragment extends PreferenceFragment 
-	implements OnPreferenceChangeListener {
+public class TunerFragment extends PreferenceFragment {
 
     private static final String TAG = "TunerFragment";
-
-    private static final String STATUS_BAR_TIPSY_LOGO_STYLE = "status_bar_tipsy_logo_style";
-    private static final String STATUS_BAR_TIPSY_LOGO_POSITION = "status_bar_tipsy_logo_position";
-
-    private ListPreference mTipsyLogoStyle;
-    private ListPreference mTipsyLogoPosition;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        PreferenceScreen prefSet = getPreferenceScreen();
-
-        final ContentResolver resolver = getActivity().getContentResolver();
-
-        mTipsyLogoStyle = (ListPreference) findPreference(STATUS_BAR_TIPSY_LOGO_STYLE);
-        mTipsyLogoStyle.setOnPreferenceChangeListener(this);
-        mTipsyLogoStyle.setValue(Integer.toString(Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE, 0)));
-        mTipsyLogoStyle.setSummary(mTipsyLogoStyle.getEntry());
-
-        mTipsyLogoPosition = (ListPreference) findPreference(STATUS_BAR_TIPSY_LOGO_POSITION);
-        mTipsyLogoPosition.setOnPreferenceChangeListener(this);
-        mTipsyLogoPosition.setValue(Integer.toString(Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, 0)));
-        mTipsyLogoPosition.setSummary(mTipsyLogoPosition.getEntry());
     }
 
     @Override
@@ -88,32 +63,5 @@ public class TunerFragment extends PreferenceFragment
         super.onPause();
 
         MetricsLogger.visibility(getContext(), MetricsEvent.TUNER, false);
-    }
-
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-	ContentResolver resolver = getActivity().getContentResolver();
-
-	if (preference == mTipsyLogoStyle) {
-	    int val = Integer.parseInt((String) newValue);
-	    int index = mTipsyLogoStyle.findIndexOfValue((String) newValue);
-	    Settings.System.putInt(resolver,
-		    Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE, val);
-	    mTipsyLogoStyle.setSummary(mTipsyLogoStyle.getEntries()[index]);
-	    return true;
-	}
-	if (preference == mTipsyLogoPosition) {
-	    int val = Integer.parseInt((String) newValue);
-	    int index = mTipsyLogoPosition.findIndexOfValue((String) newValue);
-	    Settings.System.putInt(resolver,
-		    Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, val);
-	    mTipsyLogoPosition.setSummary(mTipsyLogoPosition.getEntries()[index]);
-	    return true;
-	}
-	return false;
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        return super.onPreferenceTreeClick(preference);
     }
 }
