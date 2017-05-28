@@ -456,6 +456,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private ImageView tipsyLogo;
     private int mTipsyLogoStyle;
     private int mTipsyLogoPosition;
+    private int mTipsyLogoLoc;
     private int mTipsyLogoSize;
 
     private int mNavigationBarWindowState = WINDOW_STATE_SHOWING;
@@ -578,6 +579,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_TIPSY_LOGO_LOCATION),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_TIPSY_LOGO_SIZE),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -679,6 +683,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                         mContext.getContentResolver(),
                        Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, 0, UserHandle.USER_CURRENT);
            } else if (uri.equals(Settings.System.getUriFor(
+                        Settings.System.STATUS_BAR_TIPSY_LOGO_LOCATION))) {
+               mTipsyLogoLoc = Settings.System.getIntForUser(
+                        mContext.getContentResolver(),
+                       Settings.System.STATUS_BAR_TIPSY_LOGO_LOCATION, 0, UserHandle.USER_CURRENT);
+           } else if (uri.equals(Settings.System.getUriFor(
                         Settings.System.STATUS_BAR_TIPSY_LOGO_SIZE))) {
                mTipsyLogoSize = Settings.System.getIntForUser(
                         mContext.getContentResolver(),
@@ -702,6 +711,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE, 0, UserHandle.USER_CURRENT);
             mTipsyLogoPosition = Settings.System.getIntForUser(resolver,
                     Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, 0, UserHandle.USER_CURRENT);
+            mTipsyLogoLoc = Settings.System.getIntForUser(resolver,
+                    Settings.System.STATUS_BAR_TIPSY_LOGO_LOCATION, 0, UserHandle.USER_CURRENT);
             mTipsyLogoSize = Settings.System.getIntForUser(resolver,
                     Settings.System.STATUS_BAR_TIPSY_LOGO_SIZE, 20, UserHandle.USER_CURRENT);
             showTipsyLogo();
@@ -1298,10 +1309,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             updateCarrier();
         }
 
-        tipsyLogo = (ImageView) mStatusBarWindow.findViewById(R.id.tipsy_logo);
-        if (tipsyLogo != null) {
-            showTipsyLogo();
-        }
+        showTipsyLogo();
 
         mFlashlightController = new FlashlightController(mContext);
         mKeyguardBottomArea.setFlashlightController(mFlashlightController);
@@ -4306,28 +4314,37 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }, cancelAction, afterKeyguardGone);
     }
 
+    public void initTipsyLogo() {
+        tipsyLogo = (ImageView) mStatusBarView.findViewById(R.id.tipsy_logo);
+        if (tipsyLogo != null) {
+            tipsyLogo.setImageDrawable(null);
+            tipsyLogo.setVisibility(View.GONE);
+        }
+        tipsyLogo = (ImageView) mStatusBarView.findViewById(R.id.tipsy_logo_right);
+        if (tipsyLogo != null) {
+            tipsyLogo.setImageDrawable(null);
+            tipsyLogo.setVisibility(View.GONE);
+        }
+        return;
+    }
+
     public void showTipsyLogo() {
           Drawable logo = null;
 
           if (mStatusBarView == null) return;
           ContentResolver resolver = mContext.getContentResolver();
 
+          initTipsyLogo();
           /* Check if the logo is disabled
            * Also should be enabled for statusbar
            */
           if ((mTipsyLogoPosition == 0) ||
               ((mTipsyLogoPosition != 1) && (mTipsyLogoPosition != 3))) {
-              if (tipsyLogo != null) {
-                  tipsyLogo.setVisibility(View.GONE);
-              }
               return;
           }
 
           // do not show when the statusbar state is KEYGUARD
           if (isFalsingThresholdNeeded() == true) {
-              if (tipsyLogo != null) {
-                  tipsyLogo.setVisibility(View.GONE);
-              }
               return;
           }
 
@@ -4363,12 +4380,14 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                   break;
           }
 
-          tipsyLogo = (ImageView) mStatusBarView.findViewById(R.id.tipsy_logo);
+          if (mTipsyLogoLoc == 0) {
+              tipsyLogo = (ImageView) mStatusBarView.findViewById(R.id.tipsy_logo);
+          } else {
+              tipsyLogo = (ImageView) mStatusBarView.findViewById(R.id.tipsy_logo_right);
+          }
           if (tipsyLogo != null) {
               if (logo == null) {
                   // Something wrong. Do not show anything
-                  tipsyLogo.setImageDrawable(logo);
-                  tipsyLogo.setVisibility(View.GONE);
                   return;
               }
 

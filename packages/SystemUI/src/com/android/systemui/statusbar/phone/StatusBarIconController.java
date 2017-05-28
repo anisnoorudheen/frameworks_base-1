@@ -96,6 +96,7 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
 
     // Tipsy Logo
     private ImageView mTipsyLogo;
+    private ImageView mTipsyLogoRight;
 
     private int mIconSize;
     private int mIconHPadding;
@@ -164,6 +165,7 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
 	mWeatherLeft = (TextView) statusBar.findViewById(R.id.left_weather_temp);
 
         mTipsyLogo = (ImageView) statusBar.findViewById(R.id.tipsy_logo);
+        mTipsyLogoRight = (ImageView) statusBar.findViewById(R.id.tipsy_logo_right);
 
         mDarkModeIconColorSingleTone = context.getColor(R.color.dark_mode_icon_color_single_tone);
         mLightModeIconColorSingleTone = context.getColor(R.color.light_mode_icon_color_single_tone);
@@ -374,7 +376,17 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
         animateHide(mCenterClockLayout, animate);
         if (Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, 0) != 0) {
-           animateHide(mTipsyLogo, animate);
+            if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.STATUS_BAR_TIPSY_LOGO_LOCATION, 0) == 0) {
+                animateHide(mTipsyLogo, animate);
+            }
+        }
+        if (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, 0) != 0) {
+            if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.STATUS_BAR_TIPSY_LOGO_LOCATION, 0) == 1) {
+                animateHide(mTipsyLogoRight, animate);
+            }
         }
     }
 
@@ -383,7 +395,17 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
         animateShow(mCenterClockLayout, animate);
         if (Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, 0) != 0) {
-           animateShow(mTipsyLogo, animate);
+            if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.STATUS_BAR_TIPSY_LOGO_LOCATION, 0) == 0) {
+                animateShow(mTipsyLogo, animate);
+            }
+        }
+        if (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, 0) != 0) {
+            if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.STATUS_BAR_TIPSY_LOGO_LOCATION, 0) == 1) {
+                animateShow(mTipsyLogoRight, animate);
+            }
         }
     }
 
@@ -603,6 +625,7 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
         if (mNotificationTicker != null) mNotificationTicker.setDarkIntensity(mDarkIntensity);
         }
         mTipsyLogo.setImageTintList(ColorStateList.valueOf(mIconTint));
+        mTipsyLogoRight.setImageTintList(ColorStateList.valueOf(mIconTint));
     }
 
     public void appTransitionPending() {
