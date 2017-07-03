@@ -33,7 +33,4 @@
     <color name="material_blue_grey_800">#ff000000</color>
     <color name="material_blue_grey_900">#ff000000</color>
     <color name="material_blue_grey_950">#ff000000</color>
-
-    <color name="material_deep_beer_200">#fff1d744</color>
-    <color name="material_deep_beer_500">#fff1d744</color>
 </resources>
