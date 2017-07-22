@@ -34,6 +34,8 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuff.Mode;
 
 import com.android.systemui.BatteryMeterView;
 import com.android.systemui.Interpolators;
@@ -110,6 +112,7 @@ public class KeyguardStatusBarView extends RelativeLayout
     private ImageView tipsyLogo;
     private int mTipsyLogoStyle;
     private int mTipsyLogoPosition;
+    private int mTipsyLogoColor;
     private int mTipsyLogoSize;
 
     private boolean mShowBatteryText;
@@ -148,6 +151,9 @@ public class KeyguardStatusBarView extends RelativeLayout
                 Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE, 0, UserHandle.USER_CURRENT);
         mTipsyLogoPosition = Settings.System.getIntForUser(resolver,
                 Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, 0, UserHandle.USER_CURRENT);
+        // Default color - Tipsy
+        mTipsyLogoColor = Settings.System.getIntForUser(resolver,
+                Settings.System.STATUS_BAR_TIPSY_LOGO_COLOR, 0xFFF1D744, UserHandle.USER_CURRENT);
         mTipsyLogoSize = Settings.System.getIntForUser(resolver,
                 Settings.System.STATUS_BAR_TIPSY_LOGO_SIZE, 20, UserHandle.USER_CURRENT);
     }
@@ -215,6 +221,7 @@ public class KeyguardStatusBarView extends RelativeLayout
               tipsyLogo.getLayoutParams().height = sizeInDp;
               tipsyLogo.getLayoutParams().width = sizeInDp;
               tipsyLogo.requestLayout();
+              tipsyLogo.setColorFilter(mTipsyLogoColor, PorterDuff.Mode.MULTIPLY);
               tipsyLogo.setVisibility(View.VISIBLE);
           }
      }
@@ -655,6 +662,8 @@ public class KeyguardStatusBarView extends RelativeLayout
                     Settings.System.STATUS_BAR_TIPSY_LOGO_STYLE), false, mObserver);
         getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION), false, mObserver);
+        getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_TIPSY_LOGO_COLOR), false, mObserver);
         getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_TIPSY_LOGO_SIZE), false, mObserver);
     }

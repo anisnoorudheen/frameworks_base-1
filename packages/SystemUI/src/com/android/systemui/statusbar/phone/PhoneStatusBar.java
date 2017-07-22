@@ -463,6 +463,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private int mTipsyLogoPosition;
     private int mTipsyLogoLoc;
     private int mTipsyLogoSize;
+    private int mTipsyLogoColor;
 
     private int mNavigationBarWindowState = WINDOW_STATE_SHOWING;
 
@@ -587,6 +588,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.STATUS_BAR_TIPSY_LOGO_LOCATION),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_TIPSY_LOGO_COLOR),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_TIPSY_LOGO_SIZE),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -696,6 +700,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                         mContext.getContentResolver(),
                        Settings.System.STATUS_BAR_TIPSY_LOGO_LOCATION, 0, UserHandle.USER_CURRENT);
            } else if (uri.equals(Settings.System.getUriFor(
+                        Settings.System.STATUS_BAR_TIPSY_LOGO_COLOR))) {
+               // Default color - Tipsy
+               mTipsyLogoColor = Settings.System.getIntForUser(
+                        mContext.getContentResolver(),
+                       Settings.System.STATUS_BAR_TIPSY_LOGO_COLOR, 0xFFF1D744, UserHandle.USER_CURRENT);
+           } else if (uri.equals(Settings.System.getUriFor(
                         Settings.System.STATUS_BAR_TIPSY_LOGO_SIZE))) {
                mTipsyLogoSize = Settings.System.getIntForUser(
                         mContext.getContentResolver(),
@@ -725,6 +735,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.STATUS_BAR_TIPSY_LOGO_POSITION, 0, UserHandle.USER_CURRENT);
             mTipsyLogoLoc = Settings.System.getIntForUser(resolver,
                     Settings.System.STATUS_BAR_TIPSY_LOGO_LOCATION, 0, UserHandle.USER_CURRENT);
+            // Default color - Tipsy
+            mTipsyLogoColor = Settings.System.getIntForUser(resolver,
+                       Settings.System.STATUS_BAR_TIPSY_LOGO_COLOR, 0xFFF1D744, UserHandle.USER_CURRENT);
             mTipsyLogoSize = Settings.System.getIntForUser(resolver,
                     Settings.System.STATUS_BAR_TIPSY_LOGO_SIZE, 20, UserHandle.USER_CURRENT);
             showTipsyLogo();
@@ -4416,6 +4429,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
               tipsyLogo.getLayoutParams().height = sizeInDp;
               tipsyLogo.getLayoutParams().width = sizeInDp;
               tipsyLogo.requestLayout();
+              tipsyLogo.setColorFilter(mTipsyLogoColor, PorterDuff.Mode.MULTIPLY);
               tipsyLogo.setVisibility(View.VISIBLE);
           }
      }
