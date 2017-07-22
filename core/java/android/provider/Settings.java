@@ -4360,6 +4360,12 @@ public final class Settings {
         public static final String STATUS_BAR_TIPSY_LOGO_LOCATION = "status_bar_tipsy_logo_location";
 
         /**
+         * Statusbar Tipsy logo Color
+         * @hide
+         */
+        public static final String STATUS_BAR_TIPSY_LOGO_COLOR = "status_bar_tipsy_logo_color";
+
+        /**
          * Statusbar Tipsy logo Size
          * @hide
          */
