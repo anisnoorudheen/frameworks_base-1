@@ -1872,7 +1872,7 @@ public class KeyguardViewMediator extends SystemUI {
                 flags |= StatusBarManager.DISABLE_RECENT;
             }
             if (isShowingAndNotOccluded()) {
-                flags |= StatusBarManager.DISABLE_HOME;
+                flags |= StatusBarManager.DISABLE_HOME|StatusBarManager.DISABLE_BACK;
             }
 
             if (DEBUG) {
