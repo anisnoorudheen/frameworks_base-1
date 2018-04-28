@@ -2,8 +2,8 @@
 <resources>
     <color name="system_primary_color">#000000</color>
     <color name="system_secondary_color">#000000</color>
-    <color name="system_accent_color">#FAFAFA</color>
-    <color name="qs_detail_progress_track">#99FAFAFA</color>
+    <color name="system_accent_color">#F1D744</color>
+    <color name="qs_detail_progress_track">#99F1D744</color>
     <color name="notification_legacy_background_color">#000000</color>
     <color name="notification_material_background_color">#000000</color>
     <color name="notification_material_background_dimmed_color">#000000</color>
@@ -11,7 +11,7 @@
     <color name="notification_material_background_media_default_color">#000000</color>
     <color name="notification_ripple_untinted_color">#28ffffff</color>
     <color name="notification_ripple_color_low_priority">#30ffffff</color>
-    <color name="current_user_border_color">#FAFAFA</color>
+    <color name="current_user_border_color">#F1D744</color>
     <color name="notification_guts_bg_color">#000000</color>
     <color name="notification_guts_btn_color">#242424</color>
     <color name="assist_orb_color">#000000</color>
@@ -59,8 +59,8 @@
     <color name="primary_dark_material_dark">#000000</color>
     <color name="primary_dark_material_light">#000000</color>
     <color name="ripple_material_light">#1fffffff</color>
-    <color name="accent_material_light">#FAFAFA</color>
-    <color name="accent_material_dark">#FAFAFA</color>
+    <color name="accent_material_light">#F1D744</color>
+    <color name="accent_material_dark">#F1D744</color>
     <color name="button_material_dark">#242424</color>
     <color name="button_material_light">#242424</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
@@ -91,25 +91,25 @@
     <color name="material_grey_600">#000000</color>
     <color name="material_grey_100">#000000</color>
     <color name="material_grey_50">#000000</color>
-    <color name="material_deep_teal_200">#FAFAFA</color>
-    <color name="material_deep_teal_500">#FAFAFA</color>
+    <color name="material_deep_teal_200">#F1D744</color>
+    <color name="material_deep_teal_500">#F1D744</color>
     <color name="material_blue_grey_800">#242424</color>
     <color name="material_blue_grey_900">#000000</color>
     <color name="material_blue_grey_950">#000000</color>
-    <color name="preference_fallback_accent_color">#FAFAFA</color>
+    <color name="preference_fallback_accent_color">#F1D744</color>
     <color name="notification_shade_background_color">#80000000</color>
     <color name="notification_gear_color">#ffdddddd</color>
-    <color name="notification_guts_slider_color">#FAFAFA</color>
+    <color name="notification_guts_slider_color">#F1D744</color>
     <color name="notification_guts_disabled_slider_color">#99555555</color>
-    <color name="notification_guts_secondary_slider_color">#FAFAFA</color>
+    <color name="notification_guts_secondary_slider_color">#F1D744</color>
     <color name="notification_guts_icon_tint">#8affffff</color>
     <color name="notification_guts_disabled_icon_tint">#4dffffff</color>
     <color name="switch_bar_background">#242424</color>
-    <color name="switch_accent_color">#FAFAFA</color>
+    <color name="switch_accent_color">#F1D744</color>
     <color name="qs_edit_overflow_bg">#000000</color>
     <color name="qs_edit_item_decoration_bg">#000000</color>
     <color name="navbar_tuner_background_color">#242424</color>
-    <color name="navbar_tuner_text_color">#FAFAFA</color>
+    <color name="navbar_tuner_text_color">#F1D744</color>
     <color name="qs_detail_transition">#66ffffff</color>
     <color name="dark_mode_icon_color_single_tone">#ffaaaaaa</color>
     <color name="dark_mode_icon_color_dual_tone_background">#5caaaaaa</color>
@@ -120,17 +120,17 @@
     <!-- PopupWindows -->
     <color name="smartbar_editor_popup_background">#000000</color>
     <color name="smartbar_editor_popup_text">#ffffffff</color>
-    <color name="smartbar_editor_popup_icon_fill">#FAFAFA</color>
-    <color name="smartbar_editor_popup_horiz_separator">#FAFAFA</color>
+    <color name="smartbar_editor_popup_icon_fill">#F1D744</color>
+    <color name="smartbar_editor_popup_horiz_separator">#F1D744</color>
 
-    <color name="docked_divider_background">#FAFAFA</color>
+    <color name="docked_divider_background">#F1D744</color>
 
-    <color name="screenshot_flash_color">#FAFAFA</color>
+    <color name="screenshot_flash_color">#F1D744</color>
     <color name="screenshot_background_color">#000000</color>
 
     <color name="ksh_application_group_color">#ffd32f2f</color>
     <color name="ksh_keyword_color">#d9ffffff</color>
-    <color name="ksh_key_item_color">#FAFAFA</color>
+    <color name="ksh_key_item_color">#F1D744</color>
     <color name="ksh_key_item_background">#242424</color>
 
     <color name="notification_material_background_dark_color">#000000</color>

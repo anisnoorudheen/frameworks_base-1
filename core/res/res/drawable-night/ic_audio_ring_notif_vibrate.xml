@@ -18,7 +18,7 @@ Copyright (C) 2014 The Android Open Source Project
         android:height="32dp"
         android:viewportWidth="8.466666"
         android:viewportHeight="8.466667"
-        android:tint="#FAFAFA">
+        android:tint="#F1D744">
     <group
         android:translateY="-288.5333">
         <group

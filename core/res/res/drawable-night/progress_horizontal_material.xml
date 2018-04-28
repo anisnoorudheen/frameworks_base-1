@@ -21,7 +21,7 @@
         <scale android:scaleWidth="100%">
             <shape android:shape="rectangle">
                 <size android:height="2dp" />
-                <gradient android:startColor="@android:color/holo_blue_bright" android:endColor="#FAFAFA"/>
+                <gradient android:startColor="@android:color/holo_blue_bright" android:endColor="#F1D744"/>
             </shape>
         </scale>
     </item>

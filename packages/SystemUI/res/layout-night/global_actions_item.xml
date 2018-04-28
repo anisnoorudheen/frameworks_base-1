@@ -28,7 +28,7 @@
 
     <ImageView
         android:id="@*android:id/icon"
-        android:tint="#FAFAFA"
+        android:tint="#F1D744"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_gravity="center"
