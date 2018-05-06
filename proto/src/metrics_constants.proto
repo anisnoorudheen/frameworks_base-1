@@ -4607,5 +4607,8 @@ message MetricsEvent {
 
     // GZOSP constants
     GZOSP = 1500;
+
+    // TAVERN constants
+    TAVERN = 1501;
   }
 }
