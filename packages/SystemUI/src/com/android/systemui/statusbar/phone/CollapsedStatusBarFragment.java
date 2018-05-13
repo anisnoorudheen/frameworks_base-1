@@ -345,27 +345,30 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                 UserHandle.USER_CURRENT);
 
         switch(mLogoStyle) {
-                // GZR Skull
+                // Cheerz Bro
             case 1:
+                logo = getContext().getDrawable(R.drawable.status_bar_tipsy_logo_cheerz);
+                break;
+                // Tipsy Letters
+            case 2:
+                logo = getContext().getDrawable(R.drawable.status_bar_tipsy_logo_letters);
+                break;
+                // Tipsy Bottle
+            case 3:
+                logo = getContext().getDrawable(R.drawable.status_bar_tipsy_logo_bottle);
+                break;
+                // GZR Skull
+            case 4:
                 logo = getContext().getDrawable(R.drawable.status_bar_gzr_skull_logo);
                 break;
                 // GZR Circle
-            case 2:
+            case 5:
                 logo = getContext().getDrawable(R.drawable.status_bar_gzr_circle_logo);
                 break;
                 // GZR Clown
-            case 3:
+            case 6:
                 logo = getContext().getDrawable(R.drawable.status_bar_clown_logo);
                 break;
-                // Running Wolf
-            case 4:
-                logo = getContext().getDrawable(R.drawable.status_bar_running_wolf_logo);
-                break;
-                // Oreo Wolf
-            case 5:
-                logo = getContext().getDrawable(R.drawable.status_bar_oreo_wolf_logo);
-                break;
-                // Default
             case 0:
             default:
                 logo = getContext().getDrawable(R.drawable.status_bar_logo);
