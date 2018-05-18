@@ -42,4 +42,7 @@
     <bool name="config_haveHigherAspectRatioScreen">false</bool>
     <item name="config_screenAspectRatio" format="float" type="dimen">2.1</item>
 
+    <!-- Disable BLE -->
+    <bool name="forceDisableAlwaysOnBle">false</bool>
+
 </resources>
