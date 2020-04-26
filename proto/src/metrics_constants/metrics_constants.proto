@@ -7431,12 +7431,15 @@ message MetricsEvent {
     // Add new aosp constants above this line.
     // END OF AOSP CONSTANTS
 
-    //CarbonROM
+    //Carbon
     CARBONFIBERS = 2000;
     TILE_LOCATION_DETAIL = 2001;
     // Panel for Mobile Data
     PANEL_MOBILE_DATA = 2002;
     // Panel for Bluetooth
     PANEL_BLUETOOTH = 2003;
+
+    //Tipsy
+    TIPSY = 3000;
   }
 }

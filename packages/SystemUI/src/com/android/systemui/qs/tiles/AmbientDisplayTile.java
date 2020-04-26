@@ -112,7 +112,7 @@ public class AmbientDisplayTile extends QSTileImpl<BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.CARBONFIBERS;
+        return MetricsEvent.TIPSY;
     }
 
     @Override
