@@ -969,4 +969,12 @@ public class SignalStrength implements Parcelable {
     private static void loge(String s) {
         Rlog.e(LOG_TAG, s);
     }
-}
+boolean rssnrIgnored = Resources.getSystem().getBoolean(
+                com.android.internal.R.bool.config_ignoreRssnrSignalLevel);
+        if (rssnrIgnored) {
+            // Ignore RSSNR
+            if (rsrpIconLevel != -1) {
+                mLevel = rsrpIconLevel;
+                return;
+            }
+        }
